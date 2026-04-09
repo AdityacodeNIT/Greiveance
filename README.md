@@ -49,7 +49,7 @@ A rule-based layer sits on top and can override the model. Some key rules:
 
 - **Angry users → always escalate**  
 - **Orders above $500 → escalate**  
-- **VIP customers → prioritize and escalate when needed**  
+- **VIP customers (Gold tier) → bypass standard queue and escalate directly to white-glove human agent**  
 - **Repeat complaints → escalate for manual review**  
 - **Missing details → ask for clarification instead of guessing**
 - **If the user is reporting physical damage, always ask them to share photos of the damaged item for verification before processing a replacement or refund.**
@@ -81,7 +81,7 @@ One thing i found while testing:
 
 The model tries too hard to please angry users.
 
-If a user aggressively claims something false (for example, inventing a policy), the model may skip verification and agree just to de-escalate the situation.
+If a user aggressively claims something false (for example, inventing a policy) the model may skip verification and agree just to de-escalate the situation.
 
 This is risky.
 
