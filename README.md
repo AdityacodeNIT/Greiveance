@@ -89,6 +89,13 @@ To fix this, i added a rule-based validation layer.This layer detects aggressive
 
 ---
 
+
+# Setup
+
+Kindly clone this repo and  install the requirement.txt and set your **gemini api key** by making a .env file it can only take gemini api keys currently i have not implemented mechanism for the any other api key.
+**GEMINI_API_KEY="your-api-key"**
+
+
 ## Summary
 
 - Doesn't solely rely on the  user input 

@@ -194,15 +194,17 @@ def analyze_and_decide(
     final_action = "PENDING"
     override_reasons = []
 
-    # -------------------------------------------------------------
-    # STRICT LOCAL RULE-BASED DECISION MODULE / ESCALATION LAYER
-    # These rules OVERRIDE the LLM's classification when needed.
-    # -------------------------------------------------------------
 
-    # 1. Ambiguity override — missing order or vague complaint
-    if missing_info == "TRUE" or not order_id:
+
+    # if order id is not there
+    if not order_id:
         intent = "CLARIFICATION_NEEDED"
-        override_reasons.append("Missing order_id or insufficient complaint details.")
+        override_reasons.append("Missing order_id. Cannot proceed without verifying the order.")
+
+    # if complaint details are not there
+    if missing_info == "TRUE":
+        intent = "CLARIFICATION_NEEDED"
+        override_reasons.append("Insufficient complaint details provided by the customer.")
 
     # 2. Tone override — angry customers always escalate
     if intent != "CLARIFICATION_NEEDED" and tone == "ANGRY":
@@ -270,7 +272,7 @@ def analyze_and_decide(
         "llm_raw_response": llm_response_text
     }
 
-# -------------------- GENERAL CHAT FUNCTION --------------------
+# GENERAL CHAT FUNCTION 
 
 def general_chat(prompt: str) -> str:
     """Handles general human prompts (like policy questions) without logging a formal complaint."""
